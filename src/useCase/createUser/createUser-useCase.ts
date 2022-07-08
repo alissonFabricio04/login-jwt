@@ -7,6 +7,8 @@ export interface ICreateUser {
 
 export class CreateUserUseCase {
     async create(user: ICreateUser) {
+        if(user.name) throw new Error("Name is required")
+
         return await prismaClient.user.create({
             data: {
                 email: user.email,
